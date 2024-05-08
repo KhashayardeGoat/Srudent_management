@@ -1,4 +1,6 @@
 import tkinter as tk
+from Students import Person
+import tkinter.messagebox as massagebox
 
 
 class StudentManagementApp(tk.Tk):
@@ -40,6 +42,46 @@ class StudentManagementApp(tk.Tk):
 
         self.entry_email = tk.Entry(self)
         self.entry_email.grid(row=4, column=1, padx=10, pady=10)
+
+        btn_add = tk.Button(self, text="Add Student", command=self.add_student)
+        btn_add.grid(row=5, column=0, padx=10, pady=10)
+
+        btn_edit = tk.Button(self, text="Edit Student", command=self.edit_student)
+        btn_edit.grid(row=5, column=1, padx=10, pady=10)
+
+        btn_view = tk.Button(self, text='View Student', command=self.view_student)
+        btn_view.grid(row=6, column=0, padx=10, pady=10)
+
+        btn_delete = tk.Button(self, text='Delete Student', command=self.del_student)
+        btn_delete.grid(row=6, column=1, padx=10, pady=10)
+
+        btn_clear = tk.Button(self, text='Clear entries', command=self.clear_entries)
+        btn_clear.grid(row=7, column=0, padx=10, pady=10)
+
+    def add_student(self):
+        meli = self.entry_id.get()
+        fist_name = self.entry_first_name.get()
+        last_name = self.entry_last_name.get()
+        age = self.entry_age.get()
+        email = self.entry_email.get()
+
+        if meli and first_name and last_name and email:
+            per1 = Person(meli, firs_name, last_name, age, email)
+            messagebox.showinfo("success", 'Student added successfully!')
+            # self.database.add_student(per1)
+            self.clear_entries()
+        else:
+            massagebox.showwarning('Error', 'Please fill in all the fields !')
+
+    def edit_student(self):
+        pass
+    def view_student(self):
+        pass
+    def del_student(self):
+        pass
+    def clear_entries(self):
+        pass
+
 
 
 
