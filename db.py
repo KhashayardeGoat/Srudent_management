@@ -23,3 +23,13 @@ class Database:
         except:
             # Handle database errors gracefully
             messagebox.showwarning("Error", "It can not to add to db. !")
+
+    def get_all_students(self):
+        try:
+            query = "SELECT * FROM students"
+            self.cursor.execute(query)
+            students = self.cursor.fetchall()
+            return students
+        except mysql.connector.Error as err:
+            messagebox.showerror("Error", f'Database error: {err}')
+            return None

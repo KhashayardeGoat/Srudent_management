@@ -2,7 +2,8 @@ import tkinter as tk
 from Students import Person
 import tkinter.messagebox as messagebox
 from db import Database
-# from ttkbootstrab import Treeview
+from ttkbootstrap import Treeview
+
 
 class StudentManagementApp(tk.Tk):
     def __init__(self):
@@ -77,7 +78,27 @@ class StudentManagementApp(tk.Tk):
     def edit_student(self):
         pass
     def view_student(self):
-        pass
+        view_window = tk.Toplevel(self)
+        view_window.title('View Student')
+
+        title_label = tk.Label(view_window, text="All Students", font=("Arial, 16"))
+        title_label.pack(pady=10)
+
+        student_grid = Treeview(view_window, columns=("meli", 'first_name', "last_name", 'age', "email"),
+                                show='headings')
+        student_grid.heading('meli', text='Meli Code')
+        student_grid.heading('first_name', text='First Name')
+        student_grid.heading('last_name', text='Last Name')
+        student_grid.heading('age', text='Age')
+        student_grid.heading('email', text="Email")
+        student_grid['show'] = 'headings'
+
+        students = self.database.get_all_students()
+
+        for student in students:
+            student_grid.insert("", tk.END, values=student)
+
+        student_grid.pack(fill=tk.BOTH, expand=True)
     def del_student(self):
         pass
     def clear_entries(self):
