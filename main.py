@@ -1,7 +1,8 @@
 import tkinter as tk
 from Students import Person
 import tkinter.messagebox as messagebox
-
+from db import Database
+# from ttkbootstrab import Treeview
 
 class StudentManagementApp(tk.Tk):
     def __init__(self):
@@ -10,7 +11,7 @@ class StudentManagementApp(tk.Tk):
         self.title('Student Management System')
         self.geometry('250x400')
         self.create_widgets()
-        # self.database = Database()
+        self.database = Database()
 
     def create_widgets(self):
         lbl_id = tk.Label(self, text="Meli Code")
