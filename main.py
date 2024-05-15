@@ -61,18 +61,18 @@ class StudentManagementApp(tk.Tk):
 
     def add_student(self):
         meli = self.entry_id.get()
-        fist_name = self.entry_first_name.get()
+        first_name = self.entry_first_name.get()
         last_name = self.entry_last_name.get()
         age = self.entry_age.get()
         email = self.entry_email.get()
 
         if meli and first_name and last_name and email:
-            per1 = Person(meli, firs_name, last_name, age, email)
-            messagebox.showinfo("success", 'Student added successfully!')
-            # self.database.add_student(per1)
+            per1 = Person(meli, first_name, last_name, age, email)
+            # messagebox.showinfo("success", 'Student added successfully!')
+            self.database.add_student(per1)
             self.clear_entries()
         else:
-            massagebox.showwarning('Error', 'Please fill in all the fields !')
+            messagebox.showwarning('Error', 'Please fill in all the fields !')
 
     def edit_student(self):
         pass

@@ -1,4 +1,5 @@
 import mysql.connector
+import tkinter.messagebox as messagebox
 
 
 class Database:
@@ -10,3 +11,15 @@ class Database:
             database="student_management"
         )
         self.cursor = self.connection.cursor()
+
+    def add_student(self, person):
+        try:
+            query = "INSERT INTO students (meli, first_name, last_name, age, email) VALUES (%s, %s, %s, %s, %s)"
+            person = (person.meli, person.first_name, person.last_name, person.age, person.email)
+            self.cursor.execute(query, person)
+            self.connection.commit()
+            messagebox.showinfo("success", "Student added successfully")
+
+        except:
+            # Handle database errors gracefully
+            messagebox.showwarning("Error", "It can not to add to db. !")
