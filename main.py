@@ -112,6 +112,15 @@ class StudentManagementApp(tk.Tk):
                 self.entry_email = tk.Entry(edit_window)
                 self.entry_email.grid(row=4, column=1, padx=10, pady=10)
                 self.entry_email.insert(tk.END, student_data[4])
+
+                btn_save = tk.Button(edit_window, text='Save Changes',
+                                     command=lambda: self.database.update_student(self.selected_student[0],
+                                                                                  Person(self.entry_edit_id.get(),
+                                                                                         self.entry_first_name.get(),
+                                                                                         self.entry_last_name.get(),
+                                                                                         self.entry_age.get(),
+                                                                                         self.entry_email.get())))
+                btn_save.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
             else:
                 messagebox.showwarning("Warning", "Please select a student to edit!")
         except:
