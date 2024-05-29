@@ -76,7 +76,31 @@ class StudentManagementApp(tk.Tk):
             messagebox.showwarning('Error', 'Please fill in all the fields !')
 
     def edit_student(self):
-        pass
+        try:
+            if self.selected_student:
+                edit_window = tk.Toplevel(self)
+                edit_window.title("Edit Student")
+
+                student_data = self.selected_student
+
+                lbl_id = tk.Label(edit_window, text="Meli code:")
+                lbl_id.grid(row=0, column=0, padx=10, pady=10)
+                self.entry_edit_id = tk.Entry(edit_window, state='normal')
+                self.entry_edit_id.grid(row=0, column=1, padx=10, pady=10)
+                self.entry_edit_id.insert(tk.END, student_data[0])
+
+                lbl_first_name = tk.Label(edit_window, text="First name:")
+                lbl_first_name.grid(row=1, column=0, padx=10, pady=10)
+                self.entry_first_name = tk.Entry(edit_window)
+                self.entry_first_name.grid(row=1, column=1, padx=10, pady=10)
+                self.entry_first_name.insert(tk.END, student_data[1])
+
+                lbl_last_name = tk.Label(edit_window, text="Last name:")
+                lbl_last_name.grid(row=2, column=0, padx=10, pady=10)
+            else:
+                messagebox.showwarning("Warning", "Please select a student to edit!")
+        except:
+            messagebox.showwarning('Warning', 'Please select a student to edit!')
     def view_student(self):
         view_window = tk.Toplevel(self)
         view_window.title('View Student')
@@ -92,6 +116,12 @@ class StudentManagementApp(tk.Tk):
         student_grid.heading('age', text='Age')
         student_grid.heading('email', text="Email")
         student_grid['show'] = 'headings'
+
+        def on_select(event):
+            item_id = student_grid.selection()[0]
+            self.selected_student = student_grid.item(item_id, "values")
+
+        student_grid.bind('<<TreeviewSelect>>', on_select)
 
         students = self.database.get_all_students()
 
