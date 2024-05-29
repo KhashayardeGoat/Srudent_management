@@ -153,8 +153,20 @@ class StudentManagementApp(tk.Tk):
             student_grid.insert("", tk.END, values=student)
 
         student_grid.pack(fill=tk.BOTH, expand=True)
+
     def del_student(self):
-        pass
+        if self.selected_student:
+            try:
+                if messagebox.askyesno('Confirm Deletion', 'Are you sure you want to delete this student?'):
+                    meli_code = self.selected_student[0]
+                    self.database.delete_student(meli_code)
+
+                    self.selected_student = None
+            except:
+                messagebox.showerror('Error', 'An error occurred while deleting student')
+        else:
+            messagebox.showwarning('Warning', 'Please select a student to delete')
+
     def clear_entries(self):
         self.entry_id.delete(0, tk.END)
         self.entry_first_name.delete(0, tk.END)

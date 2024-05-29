@@ -47,4 +47,14 @@ class Database:
         except mysql.connector.Error as err:
             messagebox.showwarning('Error', f'Database error: {err}')
 
-    # def delete_student(self, meli):
+    def delete_student(self, meli):
+        try:
+            query = 'DELETE FROM students WHERE meli= %s'
+            self.cursor.execute(query, (meli,))
+            self.connection.commit()
+            if self.cursor.rowcount > 0:
+                messagebox.showinfo('Success', 'Student deleted successfully!')
+            else:
+                messagebox.showwarning('Error', "Student not found!")
+        except mysql.connector.Error as err:
+            messagebox.showwarning('Error', f'Database error: {err}')
