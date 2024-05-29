@@ -97,6 +97,21 @@ class StudentManagementApp(tk.Tk):
 
                 lbl_last_name = tk.Label(edit_window, text="Last name:")
                 lbl_last_name.grid(row=2, column=0, padx=10, pady=10)
+                self.entry_last_name = tk.Entry(edit_window)
+                self.entry_last_name.grid(row=2, column=1, padx=10, pady=10)
+                self.entry_last_name.insert(tk.END, student_data[2])
+
+                lbl_age = tk.Label(edit_window, text='Age:')
+                lbl_age.grid(row=3, column=0, padx=10, pady=10)
+                self.entry_age = tk.Entry(edit_window)
+                self.entry_age.grid(row=3, column=1, padx=10, pady=10)
+                self.entry_age.insert(tk.END, student_data[3])
+
+                lbl_email = tk.Label(edit_window, text='Email:')
+                lbl_email.grid(row=4, column=0, padx=10, pady=10)
+                self.entry_email = tk.Entry(edit_window)
+                self.entry_email.grid(row=4, column=1, padx=10, pady=10)
+                self.entry_email.insert(tk.END, student_data[4])
             else:
                 messagebox.showwarning("Warning", "Please select a student to edit!")
         except:
